@@ -17,9 +17,6 @@ class UserListView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
-        UserListWireFrame.createUserListModule(userListRef: self)
         presenter?.viewDidLoad()
     }
 }
@@ -33,6 +30,7 @@ extension UserListView: UserListViewProtocol {
         }
     }
 }
+
 extension UserListView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
@@ -43,11 +41,13 @@ extension UserListView: UITableViewDelegate, UITableViewDataSource {
         cell.contentConfiguration = content
         return cell
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return userList.count
     }
+    
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        presenter?.showUserDetail(forUser: userList[indexPath.row])
     }
 }
 

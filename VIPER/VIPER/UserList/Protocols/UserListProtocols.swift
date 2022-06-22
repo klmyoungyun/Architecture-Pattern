@@ -6,31 +6,37 @@
 //
 
 import Foundation
+import UIKit
 
-/// VIEW -> PRESENTER
 protocol UserListPresenterProtocol: AnyObject {
     var view: UserListViewProtocol? { get set }
-    var interactor: UserListInputInteractorProtocol? { get set }
+    var interactor: UserListInteractorInputProtocol? { get set }
+    var wireframe: UserListWireFrameProtocol? { get set }
+    
+    // VIEW -> PRESENTER
     func viewDidLoad()
-
+    func showUserDetail(forUser user: User)
 }
-/// PRESNETER -> VIEW
+
 protocol UserListViewProtocol: AnyObject {
+    // PRESNETER -> VIEW
     func showUsers(with users: [User])
 }
 
-/// Presenter -> Interactor
 // Presenter: Interactor야 데이터 내놔
-protocol UserListInputInteractorProtocol: AnyObject {
-    var presenter: UserListOutputInteractorProtocol? { get set }
-    func getUserList()
+protocol UserListInteractorInputProtocol: AnyObject {
+    var presenter: UserListInteractorOutputProtocol? { get set }
+    // Presenter -> Interactor
+    func fetchUserList()
 }
-/// Interactor -> Presenter
-// Interactor: Presenter님 데이터 여기있습니다~
-protocol UserListOutputInteractorProtocol: AnyObject {
-    func userListDidFetch(userList: [User])
+
+protocol UserListInteractorOutputProtocol: AnyObject {
+    // INTERACTOR -> PRESENTER
+    func didFetchUserList(_ userList: [User])
 }
 
 protocol UserListWireFrameProtocol: AnyObject {
-    
+    static func createUserListModule() -> UIViewController
+    // PRESENTER -> WIREFRAME
+    func presentUserDetail(from view: UserListViewProtocol, with user: User)
 }

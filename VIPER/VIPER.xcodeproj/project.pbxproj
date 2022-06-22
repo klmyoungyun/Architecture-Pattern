@@ -19,6 +19,10 @@
 		EEAB62942861FE04009A393B /* UserListWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAB62932861FE04009A393B /* UserListWireFrame.swift */; };
 		EEAB62962861FFDD009A393B /* UserListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAB62952861FFDD009A393B /* UserListProtocols.swift */; };
 		EEAB62992862031C009A393B /* UserListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAB62982862031C009A393B /* UserListService.swift */; };
+		EEED6AA1286218AD00F5E1F9 /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEED6AA0286218AD00F5E1F9 /* UserDetailView.swift */; };
+		EEED6AA328621ABD00F5E1F9 /* UserDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEED6AA228621ABD00F5E1F9 /* UserDetailProtocols.swift */; };
+		EEED6AA528621DB500F5E1F9 /* UserDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEED6AA428621DB500F5E1F9 /* UserDetailPresenter.swift */; };
+		EEED6AA728621ECB00F5E1F9 /* UserDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEED6AA628621ECB00F5E1F9 /* UserDetailWireFrame.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +40,10 @@
 		EEAB62932861FE04009A393B /* UserListWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListWireFrame.swift; sourceTree = "<group>"; };
 		EEAB62952861FFDD009A393B /* UserListProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListProtocols.swift; sourceTree = "<group>"; };
 		EEAB62982862031C009A393B /* UserListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListService.swift; sourceTree = "<group>"; };
+		EEED6AA0286218AD00F5E1F9 /* UserDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailView.swift; sourceTree = "<group>"; };
+		EEED6AA228621ABD00F5E1F9 /* UserDetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailProtocols.swift; sourceTree = "<group>"; };
+		EEED6AA428621DB500F5E1F9 /* UserDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailPresenter.swift; sourceTree = "<group>"; };
+		EEED6AA628621ECB00F5E1F9 /* UserDetailWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailWireFrame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,8 +76,9 @@
 		EEAB626B2861EDA3009A393B /* VIPER */ = {
 			isa = PBXGroup;
 			children = (
-				EEAB629A28620F59009A393B /* Resources */,
 				EEAB62842861F8CC009A393B /* UserList */,
+				EEED6A992862183C00F5E1F9 /* UserDetail */,
+				EEAB629A28620F59009A393B /* Resources */,
 			);
 			path = VIPER;
 			sourceTree = "<group>";
@@ -157,6 +166,49 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		EEED6A992862183C00F5E1F9 /* UserDetail */ = {
+			isa = PBXGroup;
+			children = (
+				EEED6A9A2862186200F5E1F9 /* View */,
+				EEED6A9B2862186A00F5E1F9 /* Presenter */,
+				EEED6A9D2862188200F5E1F9 /* WireFrame */,
+				EEED6A9C2862187300F5E1F9 /* Protocols */,
+			);
+			path = UserDetail;
+			sourceTree = "<group>";
+		};
+		EEED6A9A2862186200F5E1F9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EEED6AA0286218AD00F5E1F9 /* UserDetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EEED6A9B2862186A00F5E1F9 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				EEED6AA428621DB500F5E1F9 /* UserDetailPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		EEED6A9C2862187300F5E1F9 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				EEED6AA228621ABD00F5E1F9 /* UserDetailProtocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		EEED6A9D2862188200F5E1F9 /* WireFrame */ = {
+			isa = PBXGroup;
+			children = (
+				EEED6AA628621ECB00F5E1F9 /* UserDetailWireFrame.swift */,
+			);
+			path = WireFrame;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -231,11 +283,15 @@
 				EEAB62962861FFDD009A393B /* UserListProtocols.swift in Sources */,
 				EEAB626D2861EDA3009A393B /* AppDelegate.swift in Sources */,
 				EEAB626F2861EDA3009A393B /* SceneDelegate.swift in Sources */,
+				EEED6AA328621ABD00F5E1F9 /* UserDetailProtocols.swift in Sources */,
 				EEAB62942861FE04009A393B /* UserListWireFrame.swift in Sources */,
 				EEAB62902861FDF4009A393B /* UserListPresenter.swift in Sources */,
+				EEED6AA728621ECB00F5E1F9 /* UserDetailWireFrame.swift in Sources */,
+				EEED6AA528621DB500F5E1F9 /* UserDetailPresenter.swift in Sources */,
 				EEAB62922861FDF9009A393B /* User.swift in Sources */,
 				EEAB628E2861FDE3009A393B /* UserListInteractor.swift in Sources */,
 				EEAB62992862031C009A393B /* UserListService.swift in Sources */,
+				EEED6AA1286218AD00F5E1F9 /* UserDetailView.swift in Sources */,
 				EEAB628C2861FA8F009A393B /* UserListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,16 +7,15 @@
 
 import Foundation
 
-class UserListInteractor: UserListInputInteractorProtocol {
+class UserListInteractor: UserListInteractorInputProtocol {
+    weak var presenter: UserListInteractorOutputProtocol?
     
-    weak var presenter: UserListOutputInteractorProtocol?
-
-    func getUserList() {
+    func fetchUserList() {
         UserListService.shared.fetchUserData { response in
             switch response {
             case .success(let model):
                 if let users = model as? [User] {
-                    self.presenter?.userListDidFetch(userList: users)
+                    self.presenter?.didFetchUserList(users)
                 }
             case .fail:
                 print("error")

@@ -10,19 +10,23 @@ import Foundation
 
 class UserListPresenter: UserListPresenterProtocol {
     weak var view: UserListViewProtocol?
-    var interactor: UserListInputInteractorProtocol?
+    var interactor: UserListInteractorInputProtocol?
+    var wireframe: UserListWireFrameProtocol?
     
+    func showUserDetail(forUser user: User) {
+        wireframe?.presentUserDetail(from: view!, with: user)
+    }
     func viewDidLoad() {
         self.loadUserList()
     }
     func loadUserList() {
-        interactor?.getUserList()
+        interactor?.fetchUserList()
     }
 }
 
-extension UserListPresenter: UserListOutputInteractorProtocol {
+extension UserListPresenter: UserListInteractorOutputProtocol {
     // interactor가 presenter에게 데이터 줄 때
-    func userListDidFetch(userList: [User]) {
+    func didFetchUserList(_ userList: [User]) {
         view?.showUsers(with: userList)
     }
 }
