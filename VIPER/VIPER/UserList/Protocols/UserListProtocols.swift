@@ -26,6 +26,7 @@ protocol UserListViewProtocol: AnyObject {
 // Presenter: Interactor야 데이터 내놔
 protocol UserListInteractorInputProtocol: AnyObject {
     var presenter: UserListInteractorOutputProtocol? { get set }
+    var service: UserListServiceInputProtocol? { get set }
     // Presenter -> Interactor
     func fetchUserList()
 }
@@ -33,10 +34,23 @@ protocol UserListInteractorInputProtocol: AnyObject {
 protocol UserListInteractorOutputProtocol: AnyObject {
     // INTERACTOR -> PRESENTER
     func didFetchUserList(_ userList: [User])
+    func onError()
 }
 
 protocol UserListWireFrameProtocol: AnyObject {
     static func createUserListModule() -> UIViewController
     // PRESENTER -> WIREFRAME
     func presentUserDetail(from view: UserListViewProtocol, with user: User)
+}
+
+protocol UserListServiceInputProtocol: AnyObject {
+    var interactor: UserListServiceOutputProtocol? { get set }
+    // INTERACTOR -> SERVICE
+    func fetchUserList()
+}
+
+protocol UserListServiceOutputProtocol: AnyObject {
+    // SERVICE -> INTERACTOR
+    func onUserListFetched(_ users: [User])
+    func onError()
 }

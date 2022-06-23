@@ -9,17 +9,19 @@ import Foundation
 
 class UserListInteractor: UserListInteractorInputProtocol {
     weak var presenter: UserListInteractorOutputProtocol?
+    var service: UserListServiceInputProtocol?
     
     func fetchUserList() {
-        UserListService.shared.fetchUserData { response in
-            switch response {
-            case .success(let model):
-                if let users = model as? [User] {
-                    self.presenter?.didFetchUserList(users)
-                }
-            case .fail:
-                print("error")
-            }
-        }
+        service?.fetchUserList()
+    }
+}
+
+extension UserListInteractor: UserListServiceOutputProtocol {
+    func onUserListFetched(_ users: [User]) {
+        presenter?.didFetchUserList(users)
+    }
+    
+    func onError() {
+        presenter?.onError()
     }
 }

@@ -29,4 +29,8 @@ extension UserListPresenter: UserListInteractorOutputProtocol {
     func didFetchUserList(_ userList: [User]) {
         view?.showUsers(with: userList)
     }
+    
+    func onError() {
+        view?.showUsers(with: [])
+    }
 }

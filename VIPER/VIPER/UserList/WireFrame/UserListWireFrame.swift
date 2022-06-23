@@ -12,14 +12,17 @@ class UserListWireFrame: UserListWireFrameProtocol {
         let navigationController = mainStoryboard.instantiateViewController(withIdentifier: "UserListNavigationController")
         guard let view = navigationController.children.first as? UserListView else { return UIViewController() }
         let presenter: UserListPresenterProtocol & UserListInteractorOutputProtocol = UserListPresenter()
-        let interactor: UserListInteractor = UserListInteractor()
+        let interactor: UserListInteractor & UserListServiceOutputProtocol = UserListInteractor()
         let wireframe: UserListWireFrameProtocol = UserListWireFrame()
-        
+        let service: UserListServiceInputProtocol = UserListService()
+    
         view.presenter = presenter
         presenter.view = view
         presenter.wireframe = wireframe
         presenter.interactor = interactor
         interactor.presenter = presenter
+        interactor.service = service
+        service.interactor = interactor
         return navigationController
     }
     

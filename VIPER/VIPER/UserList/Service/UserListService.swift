@@ -7,16 +7,10 @@
 
 import Foundation
 
-struct UserListService {
-    static let shared = UserListService()
+class UserListService: UserListServiceInputProtocol {
+    var interactor: UserListServiceOutputProtocol?
     
-    private init() {}
-    
-    enum NetworkResult<T> {
-        case success(T)
-        case fail
-    }
-    func fetchUserData(completion: @escaping (NetworkResult<Any>) -> Void) {
+    func fetchUserList() {
         guard let url = URL(string: "https://jsonplaceholder.typicode.com/users") else { return }
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data,
@@ -26,9 +20,9 @@ struct UserListService {
             }
             do {
                 let users = try JSONDecoder().decode([User].self, from: data)
-                completion(.success(users))
+                self.interactor?.onUserListFetched(users)
             } catch {
-                completion(.fail)
+                self.interactor?.onError()
             }
         }
         task.resume()
