@@ -46,7 +46,8 @@ extension UserListView: UITableViewDelegate, UITableViewDataSource {
         return userList.count
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         presenter?.showUserDetail(forUser: userList[indexPath.row])
     }
 }
