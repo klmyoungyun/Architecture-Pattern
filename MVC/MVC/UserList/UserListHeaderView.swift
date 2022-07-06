@@ -7,14 +7,15 @@
 
 import UIKit
 
+protocol UserListHeaderViewDelegate: AnyObject {
+    func changeLabel(target: UILabel)
+}
 class UserListHeaderView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    weak var delegate: UserListHeaderViewDelegate?
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var button: UIButton!
+    
+    @IBAction func didTapButton(_ sender: UIButton) {
+        delegate?.changeLabel(target: label)
     }
-    */
-
 }
