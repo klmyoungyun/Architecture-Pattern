@@ -29,6 +29,16 @@ class UserListViewController: UIViewController {
         tableView.refreshControl = UIRefreshControl()
         bind()
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let identifier = segue.identifier ?? ""
+        if identifier == UserDetailViewController.identifier,
+           let selectedUser = sender as? User,
+           let userDetailVC = segue.destination as? UserDetailViewController {
+            let userDetailViewModel = UserDetailViewModel(selectedUser)
+            userDetailVC.viewModel = userDetailViewModel
+        }
+    }
+    
     // MARK: - BIND
     func bind() {
         // INPUT
@@ -65,9 +75,25 @@ class UserListViewController: UIViewController {
             })
             .bind(to: activityIndicator.rx.isHidden)
             .disposed(by: disposeBag)
+        
+        // ACTION
+        tableView.rx.modelSelected(User.self)
+            .subscribe(onNext: { [weak self] selectedUser in
+                self?.performSegue(withIdentifier: UserDetailViewController.identifier,
+                                   sender: selectedUser)
+            })
+            .disposed(by: disposeBag)
+        
+        tableView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.tableView.deselectRow(at: indexPath, animated: false)
+            })
+            .disposed(by: disposeBag)
+        
+        
     }
+    
     // MARK: - InterfaceBuilder Links
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 }
-

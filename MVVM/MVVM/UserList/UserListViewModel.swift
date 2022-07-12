@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 protocol UserListViewModelInput {
     var fetchUsers: AnyObserver<Void> { get }
@@ -23,6 +24,7 @@ final class UserListViewModel: UserListViewModelType {
     
     // MARK: - INPUT
     let fetchUsers: AnyObserver<Void>
+    let selectedCell: AnyObserver<User>
     
     // MARK: - Output
     let allUsers: Observable<[User]>
@@ -30,7 +32,8 @@ final class UserListViewModel: UserListViewModelType {
     let errored: Observable<NSError>
     
     init(service: UserListServiceProtocol = UserListService()) {
-       let fetching = PublishSubject<Void>()
+        let fetching = PublishSubject<Void>()
+        let selecting = PublishSubject<User>()
         
         let error = PublishSubject<Error>()
         let activating = BehaviorSubject<Bool>(value: false)
@@ -45,7 +48,8 @@ final class UserListViewModel: UserListViewModelType {
             .subscribe(onNext: { users.onNext($0) })
             .disposed(by: disposeBag)
         
-        
+        selectedCell = selecting.asObserver()
+            
         // OUTPUT
         activated = activating.distinctUntilChanged()
         allUsers = users
